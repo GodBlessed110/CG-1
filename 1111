@@ -1,1 +1,74 @@
-print('hello world')
+from tkinter import *
+import time
+
+flag = False
+root = Tk()
+mx, my = 800, 400
+
+CSX, CSY = 700, 100
+root.title('CG')
+c = Canvas(root, width=mx, height=my, bg='darkgray')
+c.pack()
+
+sea = c.create_oval(-500, 600, 1300, 250, fill="red")
+
+
+def printStar(color, sizee):
+    star = c.create_line(
+        CSX + 0, CSY + -80 * sizee,
+        CSX + -18 * sizee, CSY + -26 * sizee, CSX + -80 * sizee, CSY + -26 * sizee,
+        CSX + -30 * sizee, CSY + 10 * sizee, CSX + -50 * sizee, CSY + 68 * sizee,
+        CSX + 0, CSY + 32 * sizee, CSX + 50 * sizee, CSY + 68 * sizee,
+        CSX + 30 * sizee, CSY + 10 * sizee, CSX + 80 * sizee, CSY + -26 * sizee,
+        CSX + 18 * sizee, CSY + -26 * sizee, CSX + 0, CSY + -80 * sizee,
+        fill=color
+    )
+
+
+
+size = 15
+SPX, SPY = 100, 0
+pointsS = [
+    SPX + 1 * size, SPY + 18 * size, SPX + 3 * size, SPY + 22 * size, SPX + 15 * size, SPY + 22 * size,
+    SPX + 19 * size, SPY + 18 * size, SPX + 1 * size, SPY + 18 * size,
+]
+pointsP = [
+    SPX + 7 * size, SPY + 18 * size, SPX + 15 * size, SPY + 15 * size, SPX + 17 * size, SPY + 12 * size,
+    SPX + 16 * size, SPY + 7 * size, SPX + 11 * size, SPY + 5.2 * size,
+    SPX + 4.5 * size, SPY + 4 * size, SPX + 9 * size, SPY + 8 * size,
+    SPX + 10 * size, SPY + 12 * size, SPX + 9 * size, SPY + 15 * size, SPX + 7 * size, SPY + 18 * size
+]
+pointsF = [
+    SPX + 4.5 * size, SPY + 4 * size, SPX + 4 * size, SPY + 3 * size, SPX + 7 * size, SPY + 2 * size,
+    SPX + 4 * size, SPY + 1 * size, SPX + 4 * size, SPY + 3 * size,
+    ]
+ship = c.create_polygon(pointsS, fill="brown", outline="black", width=2)
+parus = c.create_polygon(pointsP, fill="red", outline="black", width=1)
+fflag = c.create_polygon(pointsF, fill="red", outline="black", width=2)
+m = c.create_line(SPX + 7 * size, SPY + 18 * size, SPX + 4.5 * size, SPY + 4 * size, width=3)
+
+
+Anim = True
+i = 0
+while i < 100:
+    c.move(ship, -5, 0)
+    c.move(parus, -5, 0)
+    c.move(fflag, -5, 0)
+    c.move(m, -5, 0)
+    root.update()
+    time.sleep(0.3)
+    i += 3
+    while i % 2 == 0:
+        if flag:
+            printStar("yellow", 0.5)
+            printStar("black", 0.75)
+            flag = not flag
+        else:
+            printStar("black", 0.5)
+            printStar("yellow", 0.75)
+            flag = not flag
+        root.update()
+        time.sleep(0.001)
+        i -= 1
+
+root.mainloop()
